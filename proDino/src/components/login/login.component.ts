@@ -13,27 +13,31 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 
-
 export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private userService: UserService, private localStorageService: LocalStorageService, private router: Router) { }
+  constructor(
+    private userService: UserService,
+    private localStorageService: LocalStorageService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
-    this.userService.loginUser(this.email, this.password, (success: boolean, user?: any) => {
-      if (success) {
-        this.localStorageService.setItem('userLogged', user);
-        Token.setItem(localStorage)
-        
-      } else {
-        console.log('Login failed');
+    this.userService.loginUser(this.email, this.password).subscribe(
+      response => {
+        if (response && response.token) {
+          this.localStorageService.setItem('authToken', response.token);
+          this.localStorageService.setItem('userLogged', response.user);
+        } else {
+          console.log('Login failed');
+        }
+      },
+      error => {
+        console.error('Error during login:', error);
       }
-    });
+    );
   }
-
 }
