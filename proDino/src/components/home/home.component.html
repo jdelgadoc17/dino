@@ -1,0 +1,21 @@
+<div class="home-container">
+    <h1>Parque de Dinosaurios</h1>
+  
+    <div class="status">
+      <h2>Estado del Parque</h2>
+      <p>Monedas: {{ coins }}</p>
+      <p>Clicks Realizados: {{ clickCount }}</p>
+      <p>Próxima mejora en: {{ clicksToNextUnlock }} clicks</p>
+    </div>
+  
+    <div class="clicker">
+      <button (click)="handleClick()">¡Haz Click!</button>
+      <p>{{ message }}</p>
+    </div>
+  
+    <div class="shop">
+      <h2>Tienda</h2>
+      <button (click)="buyDinosaur()" [disabled]="coins < dinosaurCost">Comprar Dinosaurio ({{ dinosaurCost }} monedas)</button>
+    </div>
+  </div>
+  
