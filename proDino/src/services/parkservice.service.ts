@@ -23,6 +23,6 @@ export class ParkService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post(`http://localhost:3000/park/update`, data, { headers });
+    return this.http.put(`http://localhost:3000/park/update`, data, { headers });
   }
 }

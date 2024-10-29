@@ -1,69 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DinosaurService } from '../../services/dinosaurservice.service';
-import { ParkService } from '../../services/parkservice.service';
 import { EnclosureService } from '../../services/enclosureservice.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule],
 })
-
-
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   coins: number = 0;
   clickCount: number = 0;
-  clicksToNextUnlock: number = 10; 
-  dinosaurCost: number = 50; 
-  enclosureCost: number = 30; 
+  clicksToNextUnlock: number = 10;
   message: string = '';
+  dinosaurs: any[] = [];
+  enclosures: any[] = []; 
 
-
-  constructor(private parkService: ParkService, private dinosaurService: DinosaurService, private enclosureService: EnclosureService) {}
+  constructor(
+    private dinosaurService: DinosaurService,
+    private enclosureService: EnclosureService
+  ) {}
 
   ngOnInit() {
-    this.parkService.getParkStatus().subscribe(data => {
-      
-    })
-
-
-
     this.dinosaurService.getDinosaurs().subscribe(data => {
-      
-    })
+      this.dinosaurs = data;
+    });
 
     this.enclosureService.getEnclosures().subscribe(data => {
-      
-    })
+      this.enclosures = data;
+    });
   }
 
   handleClick() {
     this.clickCount++;
-    this.coins++;
+    this.coins += 50; 
     this.updateUnlockStatus();
   }
 
   updateUnlockStatus() {
     this.clicksToNextUnlock = 10 - (this.clickCount % 10);
-    if (this.clickCount % 10 === 0) {
-      this.message = '!';
-    } else {
-      this.message = '';
+    this.message = this.clickCount % 10 === 0 ? '¡Nueva mejora desbloqueada!' : '';
+  }
+
+  buyDinosaur(dinosaur: any) {
+    if (this.coins >= dinosaur.cost) {
+      this.coins -= dinosaur.cost;
+      this.message = `Has comprado un ${dinosaur.name}.`;
     }
   }
 
-  buyDinosaur() {
-    if (this.coins >= this.dinosaurCost) {
-      this.coins -= this.dinosaurCost;
-      this.message = 'Has comprado un nuevo dinosaurio.';
-    }
-  }
-
-  buildEnclosure() {
-    if (this.coins >= this.enclosureCost) {
-      this.coins -= this.enclosureCost;
-      this.message = 'Has construido un nuevo recinto.';
+  buyEnclosure(enclosure: any) {
+    if (this.coins >= enclosure.cost) {
+      this.coins -= enclosure.cost;
+      this.message = `Has comprado el recinto ${enclosure.name}.`;
     }
   }
 }

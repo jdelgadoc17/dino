@@ -1,21 +1,43 @@
 <div class="home-container">
-    <h1>Parque de Dinosaurios</h1>
-  
-    <div class="status">
-      <h2>Estado del Parque</h2>
-      <p>Monedas: {{ coins }}</p>
-      <p>Clicks Realizados: {{ clickCount }}</p>
-      <p>Próxima mejora en: {{ clicksToNextUnlock }} clicks</p>
-    </div>
-  
-    <div class="clicker">
-      <button (click)="handleClick()">¡Haz Click!</button>
-      <p>{{ message }}</p>
-    </div>
-  
-    <div class="shop">
-      <h2>Tienda</h2>
-      <button (click)="buyDinosaur()" [disabled]="coins < dinosaurCost">Comprar Dinosaurio ({{ dinosaurCost }} monedas)</button>
+  <h1>Parque de Dinosaurios</h1>
+
+  <div class="status">
+    <h2>Estado del Parque</h2>
+    <p>Monedas: {{ coins }}</p>
+    <p>Clicks Realizados: {{ clickCount }}</p>
+    <p>Próxima mejora en: {{ clicksToNextUnlock }} clicks</p>
+  </div>
+
+  <div class="clicker">
+    <button (click)="handleClick()">¡Haz Click!</button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div class="dinosaur-list">
+    <h2>Dinosaurios Disponibles</h2>
+    <div *ngFor="let dinosaur of dinosaurs" class="dinosaur-card">
+      <img [src]="'http://localhost:3000/' + dinosaur.image" alt="{{ dinosaur.name }}" class="dinosaur-image">
+      <h3>{{ dinosaur.name }}</h3>
+      <p><em>{{ dinosaur.scientificName }}</em></p>
+      <p>Costo: {{ dinosaur.cost }} monedas</p>
+      <button 
+        (click)="buyDinosaur(dinosaur)"
+        [disabled]="coins < dinosaur.cost">
+        Comprar
+      </button>
     </div>
   </div>
-  
+
+  <div class="enclosure-list">
+    <h2>Recintos Disponibles</h2>
+    <div *ngFor="let enclosure of enclosures" class="enclosure-card">
+      <h3>{{ enclosure.name }}</h3>
+      <p>Costo: {{ enclosure.cost }} monedas</p>
+      <button 
+        (click)="buyEnclosure(enclosure)"
+        [disabled]="coins < enclosure.cost">
+        Comprar
+      </button>
+    </div>
+  </div>
+</div>
