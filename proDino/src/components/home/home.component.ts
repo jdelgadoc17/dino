@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
+import { DinosaurService } from '../../services/dinosaurservice.service';
+import { ParkService } from '../../services/parkservice.service';
+import { EnclosureService } from '../../services/enclosureservice.service';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
+  standalone: true
 })
+
+
 export class HomeComponent {
   coins: number = 0;
   clickCount: number = 0;
@@ -16,6 +20,39 @@ export class HomeComponent {
   message: string = '';
 
 
+  constructor(private parkService: ParkService, private dinosaurService: DinosaurService, private enclosureService: EnclosureService) {}
+
+  ngOnInit() {
+    this.parkService.getParkStatus().subscribe(data => {
+      
+    })
+
+
+
+    this.dinosaurService.getDinosaurs().subscribe(data => {
+      
+    })
+
+    this.enclosureService.getEnclosures().subscribe(data => {
+      
+    })
+  }
+
+  handleClick() {
+    this.clickCount++;
+    this.coins++;
+    this.updateUnlockStatus();
+  }
+
+  updateUnlockStatus() {
+    this.clicksToNextUnlock = 10 - (this.clickCount % 10);
+    if (this.clickCount % 10 === 0) {
+      this.message = '!';
+    } else {
+      this.message = '';
+    }
+  }
+
   buyDinosaur() {
     if (this.coins >= this.dinosaurCost) {
       this.coins -= this.dinosaurCost;
@@ -23,16 +60,10 @@ export class HomeComponent {
     }
   }
 
-  handleClick() {
-    this.clickCount++;
-    this.coins++;
-    //this.updateUnlockStatus();
+  buildEnclosure() {
+    if (this.coins >= this.enclosureCost) {
+      this.coins -= this.enclosureCost;
+      this.message = 'Has construido un nuevo recinto.';
+    }
   }
-
-
-
-
-
-
-
 }

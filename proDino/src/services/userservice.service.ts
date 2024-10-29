@@ -11,11 +11,11 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   loginUser(email: string, password: string): Observable<any> {
-    return this.http.post(`https://localhost:3000/auth/login`, { email, password });
+    return this.http.post(`http://localhost:3000/auth/login`, { email, password });
   }
 
   registerUser(email: string, password: string): Observable<any> {
-    return this.http.post(`https://localhost:3000/auth/register`, { email, password });
+    return this.http.post(`http://localhost:3000/auth/register`, { email, password });
   }
 
   isLoggedIn(): Observable<boolean> {

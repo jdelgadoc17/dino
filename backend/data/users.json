@@ -33,5 +33,10 @@
         "id": "acecbc76-c24a-4e5a-8847-b00716347366",
         "email": "Lucy_Wiegand5222@gmail.com",
         "password": "$2b$10$dgUgiR.AsC/fMXlBj04MtORG0PvWgIuNTU9uzZLHePDhdwC2AwTu."
+    },
+    {
+        "id": "8efb984b-90a1-4001-bea1-02b3bc9c4e2d",
+        "email": "javierdelgadoch95@gmail.com",
+        "password": "$2b$10$oIGtA9jUn81JBOTKGg7QYeaFBpaW6IOPQG9DmK7ap1wRlIYkPyeF6"
     }
 ]
