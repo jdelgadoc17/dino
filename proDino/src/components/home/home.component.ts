@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   enclosures: any[] = [];
   dinosauriosComprados: number[] = []; 
   recintosComprados: number[] = []; 
+  userId: string = '';
 
   constructor(
     private dinosaurService: DinosaurService,
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
       this.coins = data.coins;
       this.dinosauriosComprados = data.dinosaurIds || [];
       this.recintosComprados = data.recintosIds || [];
+      this.userId = data.userId;  // Guardamos el userId del parque
     });
   }
 
@@ -47,6 +49,7 @@ export class HomeComponent implements OnInit {
     this.clickCount++;
     this.coins += 50; 
     this.updateUnlockStatus();
+    this.updatePark(); // Llamamos a updatePark para guardar el estado después de cada click
   }
 
   updateUnlockStatus() {
@@ -59,7 +62,7 @@ export class HomeComponent implements OnInit {
       this.coins -= dinosaur.cost;
       this.dinosauriosComprados.push(dinosaur.id); 
       this.message = `Has comprado un ${dinosaur.name}.`;
-      this.updatePark(); 
+      this.updatePark();  // Llamamos a updatePark para actualizar el estado
     }
   }
 
@@ -68,12 +71,13 @@ export class HomeComponent implements OnInit {
       this.coins -= enclosure.cost;
       this.recintosComprados.push(enclosure.id); 
       this.message = `Has comprado el recinto ${enclosure.name}.`;
-      this.updatePark(); 
+      this.updatePark();  // Llamamos a updatePark para actualizar el estado
     }
   }
 
   updatePark() {
     const data = {
+      userId: this.userId,  // Incluimos userId
       coins: this.coins,
       dinosaurIds: this.dinosauriosComprados,
       recintosIds: this.recintosComprados,

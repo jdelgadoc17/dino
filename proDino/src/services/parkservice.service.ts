@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class ParkService {
 
-
   constructor(private http: HttpClient) {}
 
   getParkStatus(): Observable<any> {
@@ -18,6 +17,7 @@ export class ParkService {
     return this.http.get(`http://localhost:3000/park/status`, { headers });
   }
 
+  // Modificamos updatePark para aceptar un parámetro data
   updatePark(data: any): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders({

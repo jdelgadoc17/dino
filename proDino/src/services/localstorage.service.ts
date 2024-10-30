@@ -7,11 +7,11 @@ export class LocalStorageService {
   constructor() {}
 
   setItem(key: any, value: string): void {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, value);
   }
 
   getItem(key: string): any | null {
-    return JSON.parse(localStorage.getItem(key) || '');
+    return localStorage.getItem(key);
   }
 
   removeItem(key: string): void {
