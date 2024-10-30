@@ -44,5 +44,13 @@
         "dinosaurIds": [],
         "recintosIds": [],
         "coins": 0
+    },
+    {
+        "dinosaurIds": [
+            1,
+            2
+        ],
+        "recintosIds": [],
+        "coins": 200
     }
 ]
