@@ -15,29 +15,30 @@
 
   <div class="dinosaur-list">
     <h2>Dinosaurios Disponibles</h2>
-    <div *ngFor="let dinosaur of dinosaurs" class="dinosaur-card">
-      <img [src]="'http://localhost:3000/' + dinosaur.image" alt="{{ dinosaur.name }}" class="dinosaur-image">
-      <h3>{{ dinosaur.name }}</h3>
-      <p><em>{{ dinosaur.scientificName }}</em></p>
-      <p>Costo: {{ dinosaur.cost }} monedas</p>
-      <button 
-        (click)="buyDinosaur(dinosaur)"
-        [disabled]="coins < dinosaur.cost">
-        Comprar
-      </button>
+    <div class="dinosaur-grid">
+      <div *ngFor="let dinosaur of dinosaurs" class="dinosaur-card">
+        <img [src]="'http://localhost:3000/' + dinosaur.image" alt="{{ dinosaur.name }}" class="dinosaur-image">
+        <h3>{{ dinosaur.name }}</h3>
+        <p><em>{{ dinosaur.scientificName }}</em></p>
+        <p>Costo: {{ dinosaur.cost }} monedas</p>
+        <button (click)="buyDinosaur(dinosaur)" [disabled]="coins < dinosaur.cost">
+          Comprar
+        </button>
+      </div>
     </div>
   </div>
 
+  
   <div class="enclosure-list">
     <h2>Recintos Disponibles</h2>
-    <div *ngFor="let enclosure of enclosures" class="enclosure-card">
-      <h3>{{ enclosure.name }}</h3>
-      <p>Costo: {{ enclosure.cost }} monedas</p>
-      <button 
-        (click)="buyEnclosure(enclosure)"
-        [disabled]="coins < enclosure.cost">
-        Comprar
-      </button>
+    <div class="enclosure-grid">
+      <div *ngFor="let enclosure of enclosures" class="enclosure-card">
+        <h3>{{ enclosure.name }}</h3>
+        <p>Costo: {{ enclosure.cost }} monedas</p>
+        <button (click)="buyEnclosure(enclosure)" [disabled]="coins < enclosure.cost">
+          Comprar
+        </button>
+      </div>
     </div>
   </div>
 </div>

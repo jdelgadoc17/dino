@@ -1,4 +1,4 @@
-/* Estilo general del contenedor */
+/* Configuración del contenedor principal */
 .home-container {
   max-width: 1000px;
   margin: 20px auto;
@@ -11,7 +11,7 @@
   color: #fff;
 }
 
-/* Título */
+/* Encabezado */
 .home-container h1 {
   font-size: 2.5em;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -19,36 +19,32 @@
   margin-bottom: 20px;
 }
 
-/* Lista de dinosaurios */
-.dinosaur-list {
-  display: flex;
-  flex-wrap: wrap;
+/* Grid para dinosaurios */
+.dinosaur-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  justify-content: center;
+  margin-top: 20px;
 }
 
 /* Tarjeta de dinosaurio */
 .dinosaur-card {
-  flex: 1 1 calc(33.333% - 20px);
   background: linear-gradient(135deg, #e0eafc, #cfdef3);
   border: 2px solid #2c3e50;
   border-radius: 15px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+  padding: 20px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Animación al pasar el cursor sobre la tarjeta */
 .dinosaur-card:hover {
   transform: scale(1.05);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Imagen de dinosaurio */
 .dinosaur-image {
   width: 100%;
-  height: auto;
   border-radius: 15px 15px 0 0;
   transition: transform 0.3s ease;
 }
@@ -57,32 +53,19 @@
   transform: scale(1.1);
 }
 
-/* Información del dinosaurio */
-.dinosaur-card h3 {
-  font-size: 1.5em;
+/* Información y botones en dinosaurios */
+.dinosaur-card h3, .dinosaur-card p {
   color: #34495e;
-  margin: 15px 0 5px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.dinosaur-card p {
-  color: #34495e;
-  font-style: italic;
-  margin: 0 10px 10px;
-}
-
-/* Botón de comprar */
 .dinosaur-card button {
   background: linear-gradient(45deg, #28a745, #218838);
   color: white;
   padding: 10px 20px;
-  margin: 10px auto;
-  border: none;
   border-radius: 20px;
+  border: none;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1em;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
@@ -93,5 +76,54 @@
 
 .dinosaur-card button:hover:enabled {
   background: linear-gradient(45deg, #218838, #28a745);
+  transform: translateY(-2px);
+}
+
+/* Grid para recintos */
+.enclosure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Tarjeta de recinto */
+.enclosure-card {
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  border: 2px solid #b56576;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.enclosure-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Información y botones en recintos */
+.enclosure-card h3, .enclosure-card p {
+  color: #4a4a4a;
+}
+
+.enclosure-card button {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.enclosure-card button:disabled {
+  background: #d9534f;
+  cursor: not-allowed;
+}
+
+.enclosure-card button:hover:enabled {
+  background: linear-gradient(45deg, #2980b9, #3498db);
   transform: translateY(-2px);
 }
